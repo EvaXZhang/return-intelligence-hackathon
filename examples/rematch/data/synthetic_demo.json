@@ -1,0 +1,59 @@
+{
+  "notice": "Hand-authored synthetic hackathon data. No source rows or real PII.",
+  "returns": [
+    {
+      "return_id": "SYN-RET-0042",
+      "order_id": "SYN-ORD-2048",
+      "sku": "ALD-SYN-OXF-120",
+      "style": "Lennox Oxford",
+      "size": "9",
+      "retail_price": 120.0,
+      "purchase_day": 12,
+      "return_day": 27,
+      "returnable": true,
+      "final_sale": false,
+      "policy_window_days": 30
+    }
+  ],
+  "observations": {
+    "B": {
+      "grade": "B",
+      "confidence": 0.88,
+      "evidence": ["Light outsole wear", "Upper remains clean", "No structural damage"],
+      "source": "preset synthetic observation"
+    },
+    "C": {
+      "grade": "C",
+      "confidence": 0.82,
+      "evidence": ["Moderate outsole wear found at inspection", "Minor heel scuff", "Structure remains sound"],
+      "source": "synthetic staff inspection"
+    },
+    "uncertain": {
+      "grade": "B",
+      "confidence": 0.61,
+      "evidence": ["Lighting obscures outsole wear", "Upper appears clean", "Photo evidence conflicts with return-desk note"],
+      "source": "preset synthetic uncertainty",
+      "mismatch": true
+    }
+  },
+  "scenarios": {
+    "standard": {"observation": "B", "buyer_max_prices": {}},
+    "uncertain": {"observation": "uncertain", "buyer_max_prices": {}},
+    "fallback": {
+      "observation": "B",
+      "buyer_max_prices": {"Buyer Juniper": 65.0, "Buyer Maple": 64.0, "Buyer Cedar": 60.0}
+    }
+  },
+  "buyers": [
+    {"buyer_id": "Buyer Juniper", "sku": "ALD-SYN-OXF-120", "style": "Lennox Oxford", "size": "9", "max_wear_grade": "B", "max_price": 108.0, "store_id": "MTL-01", "distance_km": 2.0, "opted_in": true, "demo_response": "declined"},
+    {"buyer_id": "Buyer Maple", "sku": "ALD-SYN-OXF-120", "style": "Lennox Oxford", "size": "9", "max_wear_grade": "B", "max_price": 104.0, "store_id": "MTL-02", "distance_km": 5.0, "opted_in": true, "demo_response": "accepted"},
+    {"buyer_id": "Buyer Cedar", "sku": "ALD-SYN-OXF-120", "style": "Lennox Oxford", "size": "9", "max_wear_grade": "C", "max_price": 84.0, "store_id": "MTL-03", "distance_km": 4.0, "opted_in": true, "demo_response": "accepted"},
+    {"buyer_id": "Buyer Birch", "sku": "ALD-SYN-OXF-120", "style": "Lennox Oxford", "size": "10", "max_wear_grade": "C", "max_price": 90.0, "store_id": "MTL-01", "distance_km": 1.0, "opted_in": true, "demo_response": "accepted"},
+    {"buyer_id": "Buyer Pine", "sku": "ALD-SYN-OXF-120", "style": "Lennox Oxford", "size": "9", "max_wear_grade": "C", "max_price": 90.0, "store_id": "MTL-01", "distance_km": 1.0, "opted_in": false, "demo_response": "accepted"}
+  ],
+  "stores": [
+    {"store_id": "MTL-01", "label": "Downtown Montréal reuse hub"},
+    {"store_id": "MTL-02", "label": "Westmount pickup store"},
+    {"store_id": "MTL-03", "label": "Plateau pickup store"}
+  ]
+}

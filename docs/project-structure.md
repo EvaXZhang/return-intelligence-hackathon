@@ -1,0 +1,18 @@
+# Project Structure
+- `app.py` — Streamlit entry point; live Bedrock is the default backend. The quick start uses port 8504.
+- `src/return_intelligence/config.py` — Bedrock/simulated mode, deployment guard, business clock (`DEMO_CLOCK`) and optional `DEMO_SEASON` override.
+- `domain/` — enums, Pydantic records, policy, transitions, locked route matrix, plus:
+  - `detail_codes.py` — fixed detail-code enums and keyword mapping;
+  - `resolution.py` — fulfillment paths (NORMAL, MISSING_ITEM, OUT_OF_STOCK, SERVICE);
+  - `early_warning_rules.py` — shared early-warning thresholds and rule.
+- `db/` — SQLite schema, repository, invented fixtures, guarded seed/reset, and `migrations.py` (additive column migrations).
+- `providers/` — real Bedrock/Strands provider and offline simulated fallback.
+- `agents/` — six cooperating specialists; generative work is provider-backed while hard rules stay local. `early_warning.py` evaluates SKU + size and series levels.
+- `services/` — stateful Supervisor (workflow, confidence gate, defect hold, staff destination, alert status), seasonality, photo/artifact storage, composition, plus:
+  - `customer_copy.py` — customer-safe text guard and mock email;
+  - `kpis.py` — exchange, retention and drop-off KPIs.
+- `integrations/strands_factory.py` — one live Strands Supervisor plus six specialist Agents and their prompts.
+- `integrations/lambda_handlers/` — locally callable handler functions for possible later Lambda deployment; not deployed.
+- `ui/` — Customer Portal, Staff Dashboard (staff controls, grading report, reviews, defect hold, final destination, alerts, flags, KPIs), live/simulated disclosures.
+- `scripts/smoke_bedrock_*.py` — user-authorized paid live smokes; never run by the test suite.
+- `tests/` — deterministic domain, migration, persistence, supervisor, provider-contract, early-warning, KPI and Streamlit AppTest tests; `fakes.py` holds offline provider fakes. No live model calls.

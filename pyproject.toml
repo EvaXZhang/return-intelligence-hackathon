@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools==75.8.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "return-intelligence-prototype"
+version = "0.1.0"
+description = "Local synthetic shoe return intelligence prototype"
+requires-python = ">=3.11"
+dependencies = [
+  "streamlit==1.66.0",
+  "pydantic==2.14.1",
+  "Pillow==12.3.0",
+  "reportlab==4.2.5",
+  "qrcode[pil]==8.0",
+  "boto3==1.43.114",
+  "awscrt==0.36.0",
+  "strands-agents==1.61.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest==8.3.5"]
+
+[project.scripts]
+return-intelligence-seed = "return_intelligence.db.seed:main"
+return-intelligence-smoke = "return_intelligence.smoke:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"return_intelligence.db" = ["schema.sql"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+addopts = "-ra"

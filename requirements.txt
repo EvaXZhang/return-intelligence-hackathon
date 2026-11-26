@@ -1,0 +1,11 @@
+streamlit==1.66.0
+pydantic==2.14.1
+Pillow==12.3.0
+reportlab==4.2.5
+qrcode[pil]==8.0
+boto3==1.43.114
+awscrt==0.36.0
+strands-agents==1.61.0
+pytest==8.3.5
+setuptools==75.8.0
+wheel==0.45.1
